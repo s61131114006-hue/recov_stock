@@ -91,102 +91,27 @@
                         </select>
                     </div>
 
+                    <!-- ประเภทอุปกรณ์ -->
+                    <div class="space-y-2">
+                        <label for="equipmentType" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">📋</span>
+                            ประเภทอุปกรณ์
+                        </label>
+                        <select id="equipmentType" name="equipmentType" required class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all" onchange="updateEquipmentOptions()">
+                            <option value="">เลือกประเภทอุปกรณ์</option>
+                            <option value="medicine">ตัวยา & สารเคมี</option>
+                            <option value="service">อุปกรณ์ Service</option>
+                        </select>
+                    </div>
+
                     <!-- อุปกรณ์ที่คืน -->
                     <div class="space-y-2">
                         <label for="equipment" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
                             <span class="text-xl">🔧</span>
                             อุปกรณ์ที่คืน
                         </label>
-                        <select id="equipment" name="equipment" required class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all">
-                            <option value="">เลือกอุปกรณ์</option>
-                            <optgroup label="ตัวยา & สารเคมี">
-                                <option value="Terro Liquid 470 CC เหยื่อมด">Terro Liquid 470 CC เหยื่อมด</option>
-                                <option value="อิมิฟอส เอสซี">อิมิฟอส เอสซี</option>
-                                <option value="ฟิบฟอร์ซ 5 เอสซี">ฟิบฟอร์ซ 5 เอสซี</option>
-                                <option value="เซกลีรา เจลกำจัดมดแมลงสาบ">เซกลีรา เจลกำจัดมดแมลงสาบ</option>
-                                <option value="เบนทาไซด์ 250 อีซี">เบนทาไซด์ 250 อีซี</option>
-                                <option value="รีครูททู">รีครูททู</option>
-                                <option value="01-รีครูททู">01-รีครูททู</option>
-                                <option value="ทรายกำจัดลูกน้ำยุง พาโร่ - ซอง 50 กรัม">ทรายกำจัดลูกน้ำยุง พาโร่ - ซอง 50 กรัม</option>
-                                <option value="ทรายกำจัดลูกน้ำยุง พาโร่ - ถัง 25 กก">ทรายกำจัดลูกน้ำยุง พาโร่ - ถัง 25 กก</option>
-                                <option value="แอคเทลิค">แอคเทลิค</option>
-                                <option value="เจลกำจัดแมลงสาบ ADVION">เจลกำจัดแมลงสาบ ADVION</option>
-                                <option value="อแวนด้า (ยาฆ่าเชื้อโรค)">อแวนด้า (ยาฆ่าเชื้อโรค)</option>
-                                <option value="เบนทาไซด์ โปร 10">เบนทาไซด์ โปร 10</option>
-                                <option value="ไบแทค">ไบแทค</option>
-                                <option value="เข็ด (เหยื่อหนู)">เข็ด (เหยื่อหนู)</option>
-                                <option value="เชนไดร้ท์ สเตดฟาส 8 เอสซี">เชนไดร้ท์ สเตดฟาส 8 เอสซี</option>
-                                <option value="อาร์ทควัน">อาร์ทควัน</option>
-                                <option value="โดมิโน 250 ซีซี">โดมิโน 250 ซีซี</option>
-                                <option value="เฟนโดน่า Fendona">เฟนโดน่า Fendona</option>
-                                <option value="ยาฟิบฟอร์ช (พาวเดอร์)">ยาฟิบฟอร์ช (พาวเดอร์)</option>
-                                <option value="เอฟ-โปรนิล">เอฟ-โปรนิล</option>
-                                <option value="M Bait">M Bait</option>
-                                <option value="แม็กฟอร์จ ฟลีต (มด) - หลอด">แม็กฟอร์จ ฟลีต (มด) - หลอด</option>
-                                <option value="แมกฟอร์ซ แมลงสาบ">แมกฟอร์ซ แมลงสาบ</option>
-                                <option value="Niban-FG">Niban-FG</option>
-                                <option value="เหยื่อมด (ผง) Niban">เหยื่อมด (ผง) Niban</option>
-                                <option value="Optigard เจลแมลงสาป">Optigard เจลแมลงสาป</option>
-                                <option value="ออพทิการ์ดแอนท์ (เจลมด)">ออพทิการ์ดแอนท์ (เจลมด)</option>
-                                <option value="ยาเพสกาด อัลฟา">ยาเพสกาด อัลฟา</option>
-                                <option value="ยาเพสกาด สเปซ">ยาเพสกาด สเปซ</option>
-                                <option value="บ้านแมลงสาบ (พรีแม็กซ์ โปร) (แพค 5 ชิ้น)">บ้านแมลงสาบ (พรีแม็กซ์ โปร) (แพค 5 ชิ้น)</option>
-                                <option value="พรีแม็ก 250 อีซี">พรีแม็ก 250 อีซี</option>
-                                <option value="เหยื่อ AG (20 กรัม)">เหยื่อ AG (20 กรัม)</option>
-                                <option value="เหยื่อ AG">เหยื่อ AG</option>
-                                <option value="Recuit ll (กระดาษ)">Recuit ll (กระดาษ)</option>
-                                <option value="รีครูททู (20 กรัม)">รีครูททู (20 กรัม)</option>
-                                <option value="หลอดรีครูททู (หลอดเปล่า)">หลอดรีครูททู (หลอดเปล่า)</option>
-                                <option value="รีครูท โฟล์">รีครูท โฟล์</option>
-                                <option value="ซีจ (SIEGE)">ซีจ (SIEGE)</option>
-                                <option value="เหยื่อหนู (ถุง 50 เม็ด)">เหยื่อหนู (ถุง 50 เม็ด)</option>
-                                <option value="เหยื่อหนู">เหยื่อหนู</option>
-                                <option value="กำมะถัน">กำมะถัน</option>
-                                <option value="Sumipro EW ซูมิโปร">Sumipro EW ซูมิโปร</option>
-                                <option value="ยาซูมิไธออน">ยาซูมิไธออน</option>
-                                <option value="ซิเนอร์ฟอส เอสพี">ซิเนอร์ฟอส เอสพี</option>
-                                <option value="เทโนปา Tenopa">เทโนปา Tenopa</option>
-                                <option value="เทอร์เมคทริค">เทอร์เมคทริค</option>
-                                <option value="Terro Bait เหยื่อกำจัดมด">Terro Bait เหยื่อกำจัดมด</option>
-                                <option value="ฆ่าเชื้อ วีซายด์พี">ฆ่าเชื้อ วีซายด์พี</option>
-                                <option value="ยาวาซารี เอสซี">ยาวาซารี เอสซี</option>
-                                <option value="ไซเปอร์แทค 10 เอ็มซี">ไซเปอร์แทค 10 เอ็มซี</option>
-                            </optgroup>
-                            <optgroup label="อุปกรณ์เซอร์วิส">
-                                <option value="ฝาคลอริ่ง">ฝาคลอริ่ง</option>
-                                <option value="ไม้เหยื่อ MFactors (ถุง 50 ชิ้น)">ไม้เหยื่อ MFactors (ถุง 50 ชิ้น)</option>
-                                <option value="ไม้เหยื่อ MFactors">ไม้เหยื่อ MFactors</option>
-                                <option value="กล่อง AG (ติดเหยื่อ)">กล่อง AG (ติดเหยื่อ)</option>
-                                <option value="ไม้เหยื่อ Dows (ถุง 50 ชิ้น)">ไม้เหยื่อ Dows (ถุง 50 ชิ้น)</option>
-                                <option value="ถาดกาวดักหนู (ใหญ่)">ถาดกาวดักหนู (ใหญ่)</option>
-                                <option value="กล่องดักหนู (ชิ้น)">กล่องดักหนู (ชิ้น)</option>
-                                <option value="แลคซีน">แลคซีน</option>
-                                <option value="กาวสองหน้า">กาวสองหน้า</option>
-                                <option value="แก๊สกระป๋อง">แก๊สกระป๋อง</option>
-                                <option value="ผ้าปิดจมูก">ผ้าปิดจมูก</option>
-                                <option value="ถุงมือ">ถุงมือ</option>
-                                <option value="สติ๊กเกอร์ติดกล่อง">สติ๊กเกอร์ติดกล่อง</option>
-                                <option value="ฮอย ฮอย (กล่อง)">ฮอย ฮอย (กล่อง)</option>
-                                <option value="ไม้เหยื่อ Dows">ไม้เหยื่อ Dows</option>
-                                <option value="06-กล่อง AG (เก่า)">06-กล่อง AG (เก่า)</option>
-                                <option value="ชุดตรวจ ATK Flowflex">ชุดตรวจ ATK Flowflex</option>
-                                <option value="Controz Lizard กับดักจิ้งจก - แพค 3 ชิ้น">Controz Lizard กับดักจิ้งจก - แพค 3 ชิ้น</option>
-                                <option value="02-ฝาคลอริ่ง (เก่า)">02-ฝาคลอริ่ง (เก่า)</option>
-                                <option value="Corring เก่า">Corring เก่า</option>
-                                <option value="ฝา Station - ใหม่">ฝา Station - ใหม่</option>
-                                <option value="ฝา Station - เก่า">ฝา Station - เก่า</option>
-                                <option value="Extractor">Extractor</option>
-                                <option value="Kitchen Cleaner">Kitchen Cleaner</option>
-                                <option value="Lizard Glue for Trap กาวจิ้งจก">Lizard Glue for Trap กาวจิ้งจก</option>
-                                <option value="Lizard Trap กล่องจิ้งจก">Lizard Trap กล่องจิ้งจก</option>
-                                <option value="แมกฟอร์ซ Bait Station แมลงสาป">แมกฟอร์ซ Bait Station แมลงสาป</option>
-                                <option value="02-กล่องดำ (เก่า)">02-กล่องดำ (เก่า)</option>
-                                <option value="Station_corrig (เก่า)">Station_corrig (เก่า)</option>
-                                <option value="Station ใหม่ (ชิ้น)">Station ใหม่ (ชิ้น)</option>
-                                <option value="Station (เก่า)">Station (เก่า)</option>
-                                <option value="Station full set (เก่า)">Station full set (เก่า)</option>
-                                <option value="สถานีวางเหยื่อ มด/แมลงสาป">สถานีวางเหยื่อ มด/แมลงสาป</option>
-                            </optgroup>
+                        <select id="equipment" name="equipment" required disabled class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl bg-gray-100 transition-all">
+                            <option value="">กรุณาเลือกประเภทอุปกรณ์ก่อน</option>
                         </select>
                     </div>
 
@@ -284,6 +209,125 @@
     <script>
         let selectedFile = null;
 
+        // ข้อมูลอุปกรณ์แยกตามประเภท
+        const equipmentData = {
+            medicine: [
+                "Terro Liquid 470 CC เหยื่อมด",
+                "อิมิฟอส เอสซี",
+                "ฟิบฟอร์ซ 5 เอสซี",
+                "เซกลีรา เจลกำจัดมดแมลงสาบ",
+                "เบนทาไซด์ 250 อีซี",
+                "รีครูททู",
+                "01-รีครูททู",
+                "ทรายกำจัดลูกน้ำยุง พาโร่ - ซอง 50 กรัม",
+                "ทรายกำจัดลูกน้ำยุง พาโร่ - ถัง 25 กก",
+                "แอคเทลิค",
+                "เจลกำจัดแมลงสาบ ADVION",
+                "อแวนด้า (ยาฆ่าเชื้อโรค)",
+                "เบนทาไซด์ โปร 10",
+                "ไบแทค",
+                "เข็ด (เหยื่อหนู)",
+                "เชนไดร้ท์ สเตดฟาส 8 เอสซี",
+                "อาร์ทควัน",
+                "โดมิโน 250 ซีซี",
+                "เฟนโดน่า Fendona",
+                "ยาฟิบฟอร์ช (พาวเดอร์)",
+                "เอฟ-โปรนิล",
+                "M Bait",
+                "แม็กฟอร์จ ฟลีต (มด) - หลอด",
+                "แมกฟอร์ซ แมลงสาบ",
+                "Niban-FG",
+                "เหยื่อมด (ผง) Niban",
+                "Optigard เจลแมลงสาป",
+                "ออพทิการ์ดแอนท์ (เจลมด)",
+                "ยาเพสกาด อัลฟา",
+                "ยาเพสกาด สเปซ",
+                "บ้านแมลงสาบ (พรีแม็กซ์ โปร) (แพค 5 ชิ้น)",
+                "พรีแม็ก 250 อีซี",
+                "เหยื่อ AG (20 กรัม)",
+                "เหยื่อ AG",
+                "Recuit ll (กระดาษ)",
+                "รีครูททู (20 กรัม)",
+                "หลอดรีครูททู (หลอดเปล่า)",
+                "รีครูท โฟล์",
+                "ซีจ (SIEGE)",
+                "เหยื่อหนู (ถุง 50 เม็ด)",
+                "เหยื่อหนู",
+                "กำมะถัน",
+                "Sumipro EW ซูมิโปร",
+                "ยาซูมิไธออน",
+                "ซิเนอร์ฟอส เอสพี",
+                "เทโนปา Tenopa",
+                "เทอร์เมคทริค",
+                "Terro Bait เหยื่อกำจัดมด",
+                "ฆ่าเชื้อ วีซายด์พี",
+                "ยาวาซารี เอสซี",
+                "ไซเปอร์แทค 10 เอ็มซี"
+            ],
+            service: [
+                "ฝาคลอริ่ง",
+                "ไม้เหยื่อ MFactors (ถุง 50 ชิ้น)",
+                "ไม้เหยื่อ MFactors",
+                "กล่อง AG (ติดเหยื่อ)",
+                "ไม้เหยื่อ Dows (ถุง 50 ชิ้น)",
+                "ถาดกาวดักหนู (ใหญ่)",
+                "กล่องดักหนู (ชิ้น)",
+                "แลคซีน",
+                "กาวสองหน้า",
+                "แก๊สกระป๋อง",
+                "ผ้าปิดจมูก",
+                "ถุงมือ",
+                "สติ๊กเกอร์ติดกล่อง",
+                "ฮอย ฮอย (กล่อง)",
+                "ไม้เหยื่อ Dows",
+                "06-กล่อง AG (เก่า)",
+                "ชุดตรวจ ATK Flowflex",
+                "Controz Lizard กับดักจิ้งจก - แพค 3 ชิ้น",
+                "02-ฝาคลอริ่ง (เก่า)",
+                "Corring เก่า",
+                "ฝา Station - ใหม่",
+                "ฝา Station - เก่า",
+                "Extractor",
+                "Kitchen Cleaner",
+                "Lizard Glue for Trap กาวจิ้งจก",
+                "Lizard Trap กล่องจิ้งจก",
+                "แมกฟอร์ซ Bait Station แมลงสาป",
+                "02-กล่องดำ (เก่า)",
+                "Station_corrig (เก่า)",
+                "Station ใหม่ (ชิ้น)",
+                "Station (เก่า)",
+                "Station full set (เก่า)",
+                "สถานีวางเหยื่อ มด/แมลงสาป"
+            ]
+        };
+
+        function updateEquipmentOptions() {
+            const equipmentType = document.getElementById('equipmentType').value;
+            const equipmentSelect = document.getElementById('equipment');
+            
+            // ล้างตัวเลือกเดิม
+            equipmentSelect.innerHTML = '<option value="">เลือกอุปกรณ์</option>';
+            
+            if (equipmentType) {
+                // เปิดใช้งาน dropdown
+                equipmentSelect.disabled = false;
+                equipmentSelect.className = "w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all";
+                
+                // เพิ่มตัวเลือกตามประเภทที่เลือก
+                equipmentData[equipmentType].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    equipmentSelect.appendChild(option);
+                });
+            } else {
+                // ปิดใช้งาน dropdown
+                equipmentSelect.disabled = true;
+                equipmentSelect.className = "w-full px-4 py-3 border-2 border-gray-300 rounded-xl bg-gray-100 transition-all";
+                equipmentSelect.innerHTML = '<option value="">กรุณาเลือกประเภทอุปกรณ์ก่อน</option>';
+            }
+        }
+
         function handleFileSelect(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -378,6 +422,7 @@
             const formData = new FormData(this);
             const data = {
                 zone: formData.get('zone'),
+                equipmentType: formData.get('equipmentType'),
                 equipment: formData.get('equipment'),
                 quantity: formData.get('quantity'),
                 details: formData.get('details'),
@@ -421,6 +466,9 @@
                     this.reset();
                     selectedFile = null;
                     document.getElementById('imagePreview').classList.add('hidden');
+                    
+                    // รีเซ็ต dropdown อุปกรณ์
+                    updateEquipmentOptions();
                 } else {
                     showResult('error', 'เกิดข้อผิดพลาด', result.message || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
                 }
@@ -430,5 +478,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'990576dbd36cf4cf',t:'MTc2MDc2MzU0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9905eb3cf22ff4cf',t:'MTc2MDc2ODMxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
