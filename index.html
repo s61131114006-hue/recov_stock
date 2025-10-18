@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การคืนอุปกรณ์ MFACTORS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 50%, #34d399 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(52, 211, 153, 0.15);
+        }
+        
+        .loading-overlay {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-full bg-gradient-to-br from-green-50 to-emerald-100">
+    <!-- Header -->
+    <header class="gradient-bg shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold text-white text-center flex items-center justify-center gap-3">
+                <span class="text-4xl icon-bounce">📦</span>
+                การคืนอุปกรณ์ MFACTORS
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-2xl card-shadow p-8 fade-in">
+                <form id="returnForm" class="space-y-6">
+                    <!-- โซน -->
+                    <div class="space-y-2">
+                        <label for="zone" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">🏢</span>
+                            โซน
+                        </label>
+                        <select id="zone" name="zone" required class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all">
+                            <option value="">เลือกโซน</option>
+                            <option value="โซน VIP">โซน VIP</option>
+                            <option value="โซน 6">โซน 6</option>
+                            <option value="โซน 7">โซน 7</option>
+                            <option value="โซน 8">โซน 8</option>
+                            <option value="โซน 9">โซน 9</option>
+                            <option value="โซน 10">โซน 10</option>
+                            <option value="โซน 14">โซน 14</option>
+                            <option value="เบลล์">เบลล์</option>
+                            <option value="เปรม">เปรม</option>
+                            <option value="สา">สา</option>
+                        </select>
+                    </div>
+
+                    <!-- อุปกรณ์ที่คืน -->
+                    <div class="space-y-2">
+                        <label for="equipment" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">🔧</span>
+                            อุปกรณ์ที่คืน
+                        </label>
+                        <select id="equipment" name="equipment" required class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all">
+                            <option value="">เลือกอุปกรณ์</option>
+                            <optgroup label="ตัวยา & สารเคมี">
+                                <option value="Terro Liquid 470 CC เหยื่อมด">Terro Liquid 470 CC เหยื่อมด</option>
+                                <option value="อิมิฟอส เอสซี">อิมิฟอส เอสซี</option>
+                                <option value="ฟิบฟอร์ซ 5 เอสซี">ฟิบฟอร์ซ 5 เอสซี</option>
+                                <option value="เซกลีรา เจลกำจัดมดแมลงสาบ">เซกลีรา เจลกำจัดมดแมลงสาบ</option>
+                                <option value="เบนทาไซด์ 250 อีซี">เบนทาไซด์ 250 อีซี</option>
+                                <option value="รีครูททู">รีครูททู</option>
+                                <option value="01-รีครูททู">01-รีครูททู</option>
+                                <option value="ทรายกำจัดลูกน้ำยุง พาโร่ - ซอง 50 กรัม">ทรายกำจัดลูกน้ำยุง พาโร่ - ซอง 50 กรัม</option>
+                                <option value="ทรายกำจัดลูกน้ำยุง พาโร่ - ถัง 25 กก">ทรายกำจัดลูกน้ำยุง พาโร่ - ถัง 25 กก</option>
+                                <option value="แอคเทลิค">แอคเทลิค</option>
+                                <option value="เจลกำจัดแมลงสาบ ADVION">เจลกำจัดแมลงสาบ ADVION</option>
+                                <option value="อแวนด้า (ยาฆ่าเชื้อโรค)">อแวนด้า (ยาฆ่าเชื้อโรค)</option>
+                                <option value="เบนทาไซด์ โปร 10">เบนทาไซด์ โปร 10</option>
+                                <option value="ไบแทค">ไบแทค</option>
+                                <option value="เข็ด (เหยื่อหนู)">เข็ด (เหยื่อหนู)</option>
+                                <option value="เชนไดร้ท์ สเตดฟาส 8 เอสซี">เชนไดร้ท์ สเตดฟาส 8 เอสซี</option>
+                                <option value="อาร์ทควัน">อาร์ทควัน</option>
+                                <option value="โดมิโน 250 ซีซี">โดมิโน 250 ซีซี</option>
+                                <option value="เฟนโดน่า Fendona">เฟนโดน่า Fendona</option>
+                                <option value="ยาฟิบฟอร์ช (พาวเดอร์)">ยาฟิบฟอร์ช (พาวเดอร์)</option>
+                                <option value="เอฟ-โปรนิล">เอฟ-โปรนิล</option>
+                                <option value="M Bait">M Bait</option>
+                                <option value="แม็กฟอร์จ ฟลีต (มด) - หลอด">แม็กฟอร์จ ฟลีต (มด) - หลอด</option>
+                                <option value="แมกฟอร์ซ แมลงสาบ">แมกฟอร์ซ แมลงสาบ</option>
+                                <option value="Niban-FG">Niban-FG</option>
+                                <option value="เหยื่อมด (ผง) Niban">เหยื่อมด (ผง) Niban</option>
+                                <option value="Optigard เจลแมลงสาป">Optigard เจลแมลงสาป</option>
+                                <option value="ออพทิการ์ดแอนท์ (เจลมด)">ออพทิการ์ดแอนท์ (เจลมด)</option>
+                                <option value="ยาเพสกาด อัลฟา">ยาเพสกาด อัลฟา</option>
+                                <option value="ยาเพสกาด สเปซ">ยาเพสกาด สเปซ</option>
+                                <option value="บ้านแมลงสาบ (พรีแม็กซ์ โปร) (แพค 5 ชิ้น)">บ้านแมลงสาบ (พรีแม็กซ์ โปร) (แพค 5 ชิ้น)</option>
+                                <option value="พรีแม็ก 250 อีซี">พรีแม็ก 250 อีซี</option>
+                                <option value="เหยื่อ AG (20 กรัม)">เหยื่อ AG (20 กรัม)</option>
+                                <option value="เหยื่อ AG">เหยื่อ AG</option>
+                                <option value="Recuit ll (กระดาษ)">Recuit ll (กระดาษ)</option>
+                                <option value="รีครูททู (20 กรัม)">รีครูททู (20 กรัม)</option>
+                                <option value="หลอดรีครูททู (หลอดเปล่า)">หลอดรีครูททู (หลอดเปล่า)</option>
+                                <option value="รีครูท โฟล์">รีครูท โฟล์</option>
+                                <option value="ซีจ (SIEGE)">ซีจ (SIEGE)</option>
+                                <option value="เหยื่อหนู (ถุง 50 เม็ด)">เหยื่อหนู (ถุง 50 เม็ด)</option>
+                                <option value="เหยื่อหนู">เหยื่อหนู</option>
+                                <option value="กำมะถัน">กำมะถัน</option>
+                                <option value="Sumipro EW ซูมิโปร">Sumipro EW ซูมิโปร</option>
+                                <option value="ยาซูมิไธออน">ยาซูมิไธออน</option>
+                                <option value="ซิเนอร์ฟอส เอสพี">ซิเนอร์ฟอส เอสพี</option>
+                                <option value="เทโนปา Tenopa">เทโนปา Tenopa</option>
+                                <option value="เทอร์เมคทริค">เทอร์เมคทริค</option>
+                                <option value="Terro Bait เหยื่อกำจัดมด">Terro Bait เหยื่อกำจัดมด</option>
+                                <option value="ฆ่าเชื้อ วีซายด์พี">ฆ่าเชื้อ วีซายด์พี</option>
+                                <option value="ยาวาซารี เอสซี">ยาวาซารี เอสซี</option>
+                                <option value="ไซเปอร์แทค 10 เอ็มซี">ไซเปอร์แทค 10 เอ็มซี</option>
+                            </optgroup>
+                            <optgroup label="อุปกรณ์เซอร์วิส">
+                                <option value="ฝาคลอริ่ง">ฝาคลอริ่ง</option>
+                                <option value="ไม้เหยื่อ MFactors (ถุง 50 ชิ้น)">ไม้เหยื่อ MFactors (ถุง 50 ชิ้น)</option>
+                                <option value="ไม้เหยื่อ MFactors">ไม้เหยื่อ MFactors</option>
+                                <option value="กล่อง AG (ติดเหยื่อ)">กล่อง AG (ติดเหยื่อ)</option>
+                                <option value="ไม้เหยื่อ Dows (ถุง 50 ชิ้น)">ไม้เหยื่อ Dows (ถุง 50 ชิ้น)</option>
+                                <option value="ถาดกาวดักหนู (ใหญ่)">ถาดกาวดักหนู (ใหญ่)</option>
+                                <option value="กล่องดักหนู (ชิ้น)">กล่องดักหนู (ชิ้น)</option>
+                                <option value="แลคซีน">แลคซีน</option>
+                                <option value="กาวสองหน้า">กาวสองหน้า</option>
+                                <option value="แก๊สกระป๋อง">แก๊สกระป๋อง</option>
+                                <option value="ผ้าปิดจมูก">ผ้าปิดจมูก</option>
+                                <option value="ถุงมือ">ถุงมือ</option>
+                                <option value="สติ๊กเกอร์ติดกล่อง">สติ๊กเกอร์ติดกล่อง</option>
+                                <option value="ฮอย ฮอย (กล่อง)">ฮอย ฮอย (กล่อง)</option>
+                                <option value="ไม้เหยื่อ Dows">ไม้เหยื่อ Dows</option>
+                                <option value="06-กล่อง AG (เก่า)">06-กล่อง AG (เก่า)</option>
+                                <option value="ชุดตรวจ ATK Flowflex">ชุดตรวจ ATK Flowflex</option>
+                                <option value="Controz Lizard กับดักจิ้งจก - แพค 3 ชิ้น">Controz Lizard กับดักจิ้งจก - แพค 3 ชิ้น</option>
+                                <option value="02-ฝาคลอริ่ง (เก่า)">02-ฝาคลอริ่ง (เก่า)</option>
+                                <option value="Corring เก่า">Corring เก่า</option>
+                                <option value="ฝา Station - ใหม่">ฝา Station - ใหม่</option>
+                                <option value="ฝา Station - เก่า">ฝา Station - เก่า</option>
+                                <option value="Extractor">Extractor</option>
+                                <option value="Kitchen Cleaner">Kitchen Cleaner</option>
+                                <option value="Lizard Glue for Trap กาวจิ้งจก">Lizard Glue for Trap กาวจิ้งจก</option>
+                                <option value="Lizard Trap กล่องจิ้งจก">Lizard Trap กล่องจิ้งจก</option>
+                                <option value="แมกฟอร์ซ Bait Station แมลงสาป">แมกฟอร์ซ Bait Station แมลงสาป</option>
+                                <option value="02-กล่องดำ (เก่า)">02-กล่องดำ (เก่า)</option>
+                                <option value="Station_corrig (เก่า)">Station_corrig (เก่า)</option>
+                                <option value="Station ใหม่ (ชิ้น)">Station ใหม่ (ชิ้น)</option>
+                                <option value="Station (เก่า)">Station (เก่า)</option>
+                                <option value="Station full set (เก่า)">Station full set (เก่า)</option>
+                                <option value="สถานีวางเหยื่อ มด/แมลงสาป">สถานีวางเหยื่อ มด/แมลงสาป</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- จำนวนที่คืน -->
+                    <div class="space-y-2">
+                        <label for="quantity" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">🔢</span>
+                            จำนวนที่คืน
+                        </label>
+                        <input type="number" id="quantity" name="quantity" min="1" required 
+                               class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all"
+                               placeholder="กรอกจำนวน">
+                    </div>
+
+                    <!-- รายละเอียดเพิ่มเติม -->
+                    <div class="space-y-2">
+                        <label for="details" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">📝</span>
+                            รายละเอียดเพิ่มเติม
+                        </label>
+                        <textarea id="details" name="details" rows="4" 
+                                  class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all resize-none"
+                                  placeholder="กรอกรายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
+                    </div>
+
+                    <!-- อัปโหลดไฟล์ -->
+                    <div class="space-y-2">
+                        <label for="fileUpload" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">📷</span>
+                            แนบรูปภาพ
+                        </label>
+                        <div class="border-2 border-dashed border-green-300 rounded-xl p-6 text-center hover:border-green-400 transition-colors">
+                            <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.jpeg,.png" 
+                                   class="hidden" onchange="handleFileSelect(event)">
+                            <label for="fileUpload" class="cursor-pointer">
+                                <div class="text-green-500 text-4xl mb-2">📁</div>
+                                <p class="text-gray-600">คลิกเพื่อเลือกไฟล์รูปภาพ</p>
+                                <p class="text-sm text-gray-400 mt-1">รองรับ JPG, JPEG, PNG (ไม่เกิน 10MB)</p>
+                            </label>
+                        </div>
+                        <div id="imagePreview" class="mt-4 hidden">
+                            <p class="text-sm font-medium text-gray-700 mb-2">ตัวอย่างรูปภาพ:</p>
+                            <img id="previewImg" src="" alt="Preview" class="image-preview">
+                        </div>
+                    </div>
+
+                    <!-- ปุ่มส่ง -->
+                    <button type="submit" 
+                            class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-6 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                        <span class="flex items-center justify-center gap-2">
+                            <span class="text-xl">✅</span>
+                            ส่งข้อมูลการคืนอุปกรณ์
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 loading-overlay hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 card-shadow text-center max-w-sm mx-4">
+            <div class="text-4xl mb-4">⏳</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">กำลังส่งข้อมูล...</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                <div id="progressBar" class="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full progress-bar" style="width: 0%"></div>
+            </div>
+            <p id="progressText" class="text-gray-600">0%</p>
+        </div>
+    </div>
+
+    <!-- Success/Error Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 card-shadow text-center max-w-sm mx-4">
+            <div id="resultIcon" class="text-6xl mb-4"></div>
+            <h3 id="resultTitle" class="text-xl font-bold mb-4"></h3>
+            <p id="resultMessage" class="text-gray-600 mb-6"></p>
+            <button onclick="closeResultModal()" 
+                    class="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all">
+                ตกลง
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="flex items-center justify-center gap-2">
+                <span class="text-xl">©</span>
+                Copyright © MFACTORS
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedFile = null;
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // ตรวจสอบขนาดไฟล์
+            if (file.size > 10 * 1024 * 1024) {
+                showResult('error', 'ไฟล์ใหญ่เกินไป', 'กรุณาเลือกไฟล์ที่มีขนาดไม่เกิน 10MB');
+                event.target.value = '';
+                return;
+            }
+
+            // ตรวจสอบประเภทไฟล์
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!allowedTypes.includes(file.type)) {
+                showResult('error', 'ประเภทไฟล์ไม่ถูกต้อง', 'กรุณาเลือกไฟล์ JPG, JPEG หรือ PNG เท่านั้น');
+                event.target.value = '';
+                return;
+            }
+
+            selectedFile = file;
+
+            // แสดงตัวอย่างรูปภาพ
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('imagePreview').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function showProgress(percent) {
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressText').textContent = percent + '%';
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 90) progress = 90;
+                showProgress(Math.round(progress));
+            }, 200);
+            return interval;
+        }
+
+        function hideLoading(interval) {
+            clearInterval(interval);
+            showProgress(100);
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                showProgress(0);
+            }, 500);
+        }
+
+        function showResult(type, title, message) {
+            const modal = document.getElementById('resultModal');
+            const icon = document.getElementById('resultIcon');
+            const titleEl = document.getElementById('resultTitle');
+            const messageEl = document.getElementById('resultMessage');
+
+            if (type === 'success') {
+                icon.textContent = '✅';
+                titleEl.textContent = title;
+                titleEl.className = 'text-xl font-bold mb-4 text-green-600';
+            } else {
+                icon.textContent = '❌';
+                titleEl.textContent = title;
+                titleEl.className = 'text-xl font-bold mb-4 text-red-600';
+            }
+
+            messageEl.textContent = message;
+            modal.classList.remove('hidden');
+        }
+
+        function closeResultModal() {
+            document.getElementById('resultModal').classList.add('hidden');
+        }
+
+        async function convertFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.getElementById('returnForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                zone: formData.get('zone'),
+                equipment: formData.get('equipment'),
+                quantity: formData.get('quantity'),
+                details: formData.get('details'),
+                timestamp: new Date().toLocaleString('th-TH')
+            };
+
+            // จัดการไฟล์
+            if (selectedFile) {
+                try {
+                    const base64Data = await convertFileToBase64(selectedFile);
+                    data.file = {
+                        name: selectedFile.name,
+                        type: selectedFile.type,
+                        data: base64Data
+                    };
+                } catch (error) {
+                    showResult('error', 'เกิดข้อผิดพลาด', 'ไม่สามารถประมวลผลไฟล์ได้');
+                    return;
+                }
+            }
+
+            const loadingInterval = showLoading();
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzD4-9WvmW2cy28vTTuiF2gKrkNL-ukOuJTJDUAco5gIlvEg4FqqMsLzx3v49EDV_4c/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                hideLoading(loadingInterval);
+
+                if (result.success) {
+                    showResult('success', 'ส่งข้อมูลสำเร็จ!', 'ข้อมูลการคืนอุปกรณ์ได้ถูกบันทึกเรียบร้อยแล้ว');
+                    
+                    // รีเซ็ตฟอร์ม
+                    this.reset();
+                    selectedFile = null;
+                    document.getElementById('imagePreview').classList.add('hidden');
+                } else {
+                    showResult('error', 'เกิดข้อผิดพลาด', result.message || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+                }
+            } catch (error) {
+                hideLoading(loadingInterval);
+                showResult('error', 'เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'990576dbd36cf4cf',t:'MTc2MDc2MzU0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
