@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การคืนอุปกรณ์ MFACTORS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 50%, #34d399 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(52, 211, 153, 0.15);
+        }
+        
+        .loading-overlay {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .icon-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-full bg-gradient-to-br from-green-50 to-emerald-100">
+    <!-- Header -->
+    <header class="gradient-bg shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold text-white text-center flex items-center justify-center gap-3">
+                <span class="text-4xl icon-bounce">📦</span>
+                การคืนอุปกรณ์ MFACTORS
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-2xl card-shadow p-8 fade-in">
+                <form id="returnForm" class="space-y-6">
+                    <!-- โซน -->
+                    <div class="space-y-2">
+                        <label for="zone" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">🏢</span>
+                            โซน
+                        </label>
+                        <select id="zone" name="zone" required class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all">
+                            <option value="">เลือกโซน</option>
+                            <option value="โซน VIP">โซน VIP</option>
+                            <option value="โซน 6">โซน 6</option>
+                            <option value="โซน 7">โซน 7</option>
+                            <option value="โซน 8">โซน 8</option>
+                            <option value="โซน 9">โซน 9</option>
+                            <option value="โซน 10">โซน 10</option>
+                            <option value="โซน 14">โซน 14</option>
+                            <option value="เบลล์">เบลล์</option>
+                            <option value="เปรม">เปรม</option>
+                            <option value="สา">สา</option>
+                        </select>
+                    </div>
+
+                    <!-- ประเภทอุปกรณ์ -->
+                    <div class="space-y-2">
+                        <label for="equipmentType" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">📋</span>
+                            ประเภทอุปกรณ์
+                        </label>
+                        <select id="equipmentType" name="equipmentType" required class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all" onchange="updateEquipmentOptions()">
+                            <option value="">เลือกประเภทอุปกรณ์</option>
+                            <option value="medicine">ตัวยา & สารเคมี</option>
+                            <option value="service">อุปกรณ์ Service</option>
+                        </select>
+                    </div>
+
+                    <!-- อุปกรณ์ที่คืน -->
+                    <div class="space-y-2">
+                        <label for="equipment" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">🔧</span>
+                            อุปกรณ์ที่คืน
+                        </label>
+                        <select id="equipment" name="equipment" required disabled class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl bg-gray-100 transition-all">
+                            <option value="">กรุณาเลือกประเภทอุปกรณ์ก่อน</option>
+                        </select>
+                    </div>
+
+                    <!-- จำนวนที่คืน -->
+                    <div class="space-y-2">
+                        <label for="quantity" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">🔢</span>
+                            จำนวนที่คืน
+                        </label>
+                        <input type="number" id="quantity" name="quantity" min="1" required 
+                               class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all"
+                               placeholder="กรอกจำนวน">
+                    </div>
+
+                    <!-- รายละเอียดเพิ่มเติม -->
+                    <div class="space-y-2">
+                        <label for="details" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">📝</span>
+                            รายละเอียดเพิ่มเติม
+                        </label>
+                        <textarea id="details" name="details" rows="4" 
+                                  class="w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all resize-none"
+                                  placeholder="กรอกรายละเอียดเพิ่มเติม (ถ้ามี)"></textarea>
+                    </div>
+
+                    <!-- อัปโหลดไฟล์ -->
+                    <div class="space-y-2">
+                        <label for="fileUpload" class="flex items-center gap-2 text-lg font-semibold text-gray-700">
+                            <span class="text-xl">📷</span>
+                            แนบรูปภาพ
+                        </label>
+                        <div class="border-2 border-dashed border-green-300 rounded-xl p-6 text-center hover:border-green-400 transition-colors">
+                            <input type="file" id="fileUpload" name="fileUpload" accept=".jpg,.jpeg,.png" 
+                                   class="hidden" onchange="handleFileSelect(event)">
+                            <label for="fileUpload" class="cursor-pointer">
+                                <div class="text-green-500 text-4xl mb-2">📁</div>
+                                <p class="text-gray-600">คลิกเพื่อเลือกไฟล์รูปภาพ</p>
+                                <p class="text-sm text-gray-400 mt-1">รองรับ JPG, JPEG, PNG (ไม่เกิน 10MB)</p>
+                            </label>
+                        </div>
+                        <div id="imagePreview" class="mt-4 hidden">
+                            <p class="text-sm font-medium text-gray-700 mb-2">ตัวอย่างรูปภาพ:</p>
+                            <img id="previewImg" src="" alt="Preview" class="image-preview">
+                        </div>
+                    </div>
+
+                    <!-- ปุ่มส่ง -->
+                    <button type="submit" 
+                            class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-6 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                        <span class="flex items-center justify-center gap-2">
+                            <span class="text-xl">✅</span>
+                            ส่งข้อมูลการคืนอุปกรณ์
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 loading-overlay hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 card-shadow text-center max-w-sm mx-4">
+            <div class="text-4xl mb-4">⏳</div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">กำลังส่งข้อมูล...</h3>
+            <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                <div id="progressBar" class="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full progress-bar" style="width: 0%"></div>
+            </div>
+            <p id="progressText" class="text-gray-600">0%</p>
+        </div>
+    </div>
+
+    <!-- Success/Error Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 card-shadow text-center max-w-sm mx-4">
+            <div id="resultIcon" class="text-6xl mb-4"></div>
+            <h3 id="resultTitle" class="text-xl font-bold mb-4"></h3>
+            <p id="resultMessage" class="text-gray-600 mb-6"></p>
+            <button onclick="closeResultModal()" 
+                    class="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-emerald-700 transition-all">
+                ตกลง
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="flex items-center justify-center gap-2">
+                <span class="text-xl">©</span>
+                Copyright © MFACTORS
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedFile = null;
+
+        // ข้อมูลอุปกรณ์แยกตามประเภท
+        const equipmentData = {
+            medicine: [
+                "Terro Liquid 470 CC เหยื่อมด",
+                "อิมิฟอส เอสซี",
+                "ฟิบฟอร์ซ 5 เอสซี",
+                "เซกลีรา เจลกำจัดมดแมลงสาบ",
+                "เบนทาไซด์ 250 อีซี",
+                "รีครูททู",
+                "01-รีครูททู",
+                "ทรายกำจัดลูกน้ำยุง พาโร่ - ซอง 50 กรัม",
+                "ทรายกำจัดลูกน้ำยุง พาโร่ - ถัง 25 กก",
+                "แอคเทลิค",
+                "เจลกำจัดแมลงสาบ ADVION",
+                "อแวนด้า (ยาฆ่าเชื้อโรค)",
+                "เบนทาไซด์ โปร 10",
+                "ไบแทค",
+                "เข็ด (เหยื่อหนู)",
+                "เชนไดร้ท์ สเตดฟาส 8 เอสซี",
+                "อาร์ทควัน",
+                "โดมิโน 250 ซีซี",
+                "เฟนโดน่า Fendona",
+                "ยาฟิบฟอร์ช (พาวเดอร์)",
+                "เอฟ-โปรนิล",
+                "M Bait",
+                "แม็กฟอร์จ ฟลีต (มด) - หลอด",
+                "แมกฟอร์ซ แมลงสาบ",
+                "Niban-FG",
+                "เหยื่อมด (ผง) Niban",
+                "Optigard เจลแมลงสาป",
+                "ออพทิการ์ดแอนท์ (เจลมด)",
+                "ยาเพสกาด อัลฟา",
+                "ยาเพสกาด สเปซ",
+                "บ้านแมลงสาบ (พรีแม็กซ์ โปร) (แพค 5 ชิ้น)",
+                "พรีแม็ก 250 อีซี",
+                "เหยื่อ AG (20 กรัม)",
+                "เหยื่อ AG",
+                "Recuit ll (กระดาษ)",
+                "รีครูททู (20 กรัม)",
+                "หลอดรีครูททู (หลอดเปล่า)",
+                "รีครูท โฟล์",
+                "ซีจ (SIEGE)",
+                "เหยื่อหนู (ถุง 50 เม็ด)",
+                "เหยื่อหนู",
+                "กำมะถัน",
+                "Sumipro EW ซูมิโปร",
+                "ยาซูมิไธออน",
+                "ซิเนอร์ฟอส เอสพี",
+                "เทโนปา Tenopa",
+                "เทอร์เมคทริค",
+                "Terro Bait เหยื่อกำจัดมด",
+                "ฆ่าเชื้อ วีซายด์พี",
+                "ยาวาซารี เอสซี",
+                "ไซเปอร์แทค 10 เอ็มซี"
+            ],
+            service: [
+                "ฝาคลอริ่ง",
+                "ไม้เหยื่อ MFactors (ถุง 50 ชิ้น)",
+                "ไม้เหยื่อ MFactors",
+                "กล่อง AG (ติดเหยื่อ)",
+                "ไม้เหยื่อ Dows (ถุง 50 ชิ้น)",
+                "ถาดกาวดักหนู (ใหญ่)",
+                "กล่องดักหนู (ชิ้น)",
+                "แลคซีน",
+                "กาวสองหน้า",
+                "แก๊สกระป๋อง",
+                "ผ้าปิดจมูก",
+                "ถุงมือ",
+                "สติ๊กเกอร์ติดกล่อง",
+                "ฮอย ฮอย (กล่อง)",
+                "ไม้เหยื่อ Dows",
+                "06-กล่อง AG (เก่า)",
+                "ชุดตรวจ ATK Flowflex",
+                "Controz Lizard กับดักจิ้งจก - แพค 3 ชิ้น",
+                "02-ฝาคลอริ่ง (เก่า)",
+                "Corring เก่า",
+                "ฝา Station - ใหม่",
+                "ฝา Station - เก่า",
+                "Extractor",
+                "Kitchen Cleaner",
+                "Lizard Glue for Trap กาวจิ้งจก",
+                "Lizard Trap กล่องจิ้งจก",
+                "แมกฟอร์ซ Bait Station แมลงสาป",
+                "02-กล่องดำ (เก่า)",
+                "Station_corrig (เก่า)",
+                "Station ใหม่ (ชิ้น)",
+                "Station (เก่า)",
+                "Station full set (เก่า)",
+                "สถานีวางเหยื่อ มด/แมลงสาป"
+            ]
+        };
+
+        function updateEquipmentOptions() {
+            const equipmentType = document.getElementById('equipmentType').value;
+            const equipmentSelect = document.getElementById('equipment');
+            
+            // ล้างตัวเลือกเดิม
+            equipmentSelect.innerHTML = '<option value="">เลือกอุปกรณ์</option>';
+            
+            if (equipmentType) {
+                // เปิดใช้งาน dropdown
+                equipmentSelect.disabled = false;
+                equipmentSelect.className = "w-full px-4 py-3 border-2 border-green-200 rounded-xl focus:border-green-400 focus:ring-2 focus:ring-green-200 transition-all";
+                
+                // เพิ่มตัวเลือกตามประเภทที่เลือก
+                equipmentData[equipmentType].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    equipmentSelect.appendChild(option);
+                });
+            } else {
+                // ปิดใช้งาน dropdown
+                equipmentSelect.disabled = true;
+                equipmentSelect.className = "w-full px-4 py-3 border-2 border-gray-300 rounded-xl bg-gray-100 transition-all";
+                equipmentSelect.innerHTML = '<option value="">กรุณาเลือกประเภทอุปกรณ์ก่อน</option>';
+            }
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // ตรวจสอบขนาดไฟล์
+            if (file.size > 10 * 1024 * 1024) {
+                showResult('error', 'ไฟล์ใหญ่เกินไป', 'กรุณาเลือกไฟล์ที่มีขนาดไม่เกิน 10MB');
+                event.target.value = '';
+                return;
+            }
+
+            // ตรวจสอบประเภทไฟล์
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!allowedTypes.includes(file.type)) {
+                showResult('error', 'ประเภทไฟล์ไม่ถูกต้อง', 'กรุณาเลือกไฟล์ JPG, JPEG หรือ PNG เท่านั้น');
+                event.target.value = '';
+                return;
+            }
+
+            selectedFile = file;
+
+            // แสดงตัวอย่างรูปภาพ
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('imagePreview').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function showProgress(percent) {
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressText').textContent = percent + '%';
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 90) progress = 90;
+                showProgress(Math.round(progress));
+            }, 200);
+            return interval;
+        }
+
+        function hideLoading(interval) {
+            clearInterval(interval);
+            showProgress(100);
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                showProgress(0);
+            }, 500);
+        }
+
+        function showResult(type, title, message) {
+            const modal = document.getElementById('resultModal');
+            const icon = document.getElementById('resultIcon');
+            const titleEl = document.getElementById('resultTitle');
+            const messageEl = document.getElementById('resultMessage');
+
+            if (type === 'success') {
+                icon.textContent = '✅';
+                titleEl.textContent = title;
+                titleEl.className = 'text-xl font-bold mb-4 text-green-600';
+            } else {
+                icon.textContent = '❌';
+                titleEl.textContent = title;
+                titleEl.className = 'text-xl font-bold mb-4 text-red-600';
+            }
+
+            messageEl.textContent = message;
+            modal.classList.remove('hidden');
+        }
+
+        function closeResultModal() {
+            document.getElementById('resultModal').classList.add('hidden');
+        }
+
+        async function convertFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        document.getElementById('returnForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                zone: formData.get('zone'),
+                equipmentType: formData.get('equipmentType'),
+                equipment: formData.get('equipment'),
+                quantity: formData.get('quantity'),
+                details: formData.get('details'),
+                timestamp: new Date().toLocaleString('th-TH')
+            };
+
+            // จัดการไฟล์
+            if (selectedFile) {
+                try {
+                    const base64Data = await convertFileToBase64(selectedFile);
+                    data.file = {
+                        name: selectedFile.name,
+                        type: selectedFile.type,
+                        data: base64Data
+                    };
+                } catch (error) {
+                    showResult('error', 'เกิดข้อผิดพลาด', 'ไม่สามารถประมวลผลไฟล์ได้');
+                    return;
+                }
+            }
+
+            const loadingInterval = showLoading();
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzD4-9WvmW2cy28vTTuiF2gKrkNL-ukOuJTJDUAco5gIlvEg4FqqMsLzx3v49EDV_4c/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                hideLoading(loadingInterval);
+
+                if (result.success) {
+                    showResult('success', 'ส่งข้อมูลสำเร็จ!', 'ข้อมูลการคืนอุปกรณ์ได้ถูกบันทึกเรียบร้อยแล้ว');
+                    
+                    // รีเซ็ตฟอร์ม
+                    this.reset();
+                    selectedFile = null;
+                    document.getElementById('imagePreview').classList.add('hidden');
+                    
+                    // รีเซ็ต dropdown อุปกรณ์
+                    updateEquipmentOptions();
+                } else {
+                    showResult('error', 'เกิดข้อผิดพลาด', result.message || 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+                }
+            } catch (error) {
+                hideLoading(loadingInterval);
+                showResult('error', 'เกิดข้อผิดพลาด', 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9905eb3cf22ff4cf',t:'MTc2MDc2ODMxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
